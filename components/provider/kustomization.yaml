@@ -1,0 +1,68 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+resources:
+  - provider-controller.yaml
+
+patches:
+- target:
+    kind: Provider
+  patch: |-
+    - op: add
+      path: /spec/controllerConfigRef
+      value:
+          name: ERROR!
+
+replacements:
+- source:
+    kind: Provider
+    fieldPath: metadata.name
+  targets:
+  - select:
+      kind: ControllerConfig
+    fieldPaths:
+    - metadata.name
+    options:
+      delimiter: '-'
+      index: -1
+
+- source:
+    kind: ControllerConfig
+    fieldPath: metadata.name
+  targets:
+  - select:
+      kind: Provider
+    fieldPaths:
+    - spec.controllerConfigRef.name
+
+- source:
+    kind: Provider
+    fieldPath: spec.package
+    options:
+      delimiter: ':'
+      index: 0
+  targets:
+  - select:
+      kind: ControllerConfig
+    fieldPaths:
+    - spec.image
+    options:
+      delimiter: '-'
+      index: -1
+- source:
+    kind: Provider
+    fieldPath: spec.package
+    options:
+      delimiter: ':'
+      index: 1
+  targets:
+  - select:
+      kind: ControllerConfig
+    fieldPaths:
+    - spec.image
+    options:
+      delimiter: ':'
+      index: 1
+
+configurations:
+  - kustomizeconfig.yaml

@@ -1,0 +1,15 @@
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  name: controller
+spec:
+  image: controller
+  args:
+    - --debug
+    - --poll=3m
+  podSecurityContext:
+    runAsNonRoot: true
+  securityContext:
+    privileged: false
+    runAsNonRoot: true
+

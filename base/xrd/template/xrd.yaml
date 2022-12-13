@@ -1,0 +1,14 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: x${PLURAL_NAME}
+spec:
+  group: ${GROUP_NAME}
+  names:
+    kind: X${KIND_NAME}
+    plural: x${PLURAL_NAME}s
+  claimNames:
+    kind: ${KIND_NAME}
+    plural: ${PLURAL_NAME}s
+  versions:
+  - name: v1alpha1

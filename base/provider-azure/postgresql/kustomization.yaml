@@ -1,0 +1,6 @@
+resources:
+  - ../../xrd/postgresql
+  - composition.yaml
+
+components:
+  - ../../../components/composition

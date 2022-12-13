@@ -1,0 +1,5 @@
+resources:
+  - xrd.yaml
+
+components:
+  - ../../../components/xrd

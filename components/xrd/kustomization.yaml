@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+replacements:
+- source:
+    kind: CompositeResourceDefinition
+    fieldPath: spec.group
+  targets:
+  - select:
+      kind: CompositeResourceDefinition
+    fieldPaths:
+    - metadata.name
+    options:
+      delimiter: '.'
+      index: 10 #dirty hack

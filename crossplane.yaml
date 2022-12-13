@@ -1,0 +1,19 @@
+apiVersion: meta.pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: crossplane-blueprints
+  annotations:
+    friendly-name.meta.crossplane.io: "Kustomize Blueprints for Crossplane"
+    meta.crossplane.io/source: https://github.com/el-mail/crossplane-kustomize
+    meta.crossplane.io/license: MIT-0
+    meta.crossplane.io/maintainer: El Mail
+    meta.crossplane.io/description: ""
+    meta.crossplane.io/readme: ""
+spec:
+  crossplane:
+    version: ">=v1.9.1"
+  dependsOn:
+    - provider: crossplane/provider-aws
+      version: ">=v0.31.0"
+    - provider: crossplane/provider-azure
+      version: ">=v0.31.0"
